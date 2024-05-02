@@ -258,7 +258,7 @@ def predict_outcomes(df, background_df, model_path=''):
     sequence_length = 165
     model_name=model_path+'model.h5'
     #model_path+
-    with open("train_pairs.pkl", 'rb') as f:
+    with open("/app/train_pairs.pkl", 'rb') as f:
      train_pairs = pickle.load(f)
     #print('dentro predict - len(train_pairs): ',len(train_pairs))
     with open(model_path+'tokens.pkl', 'rb') as f:
