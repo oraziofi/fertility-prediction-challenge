@@ -33,6 +33,7 @@ import pickle
 import json
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
+import os
 
 class CustomLayer(keras.layers.Layer):
     def __init__(self, arg1, arg2):
@@ -249,8 +250,9 @@ def predict_outcomes(df, background_df, model_path=''):
         {"nomem_encr": df["nomem_encr"], "prediction": predictions}
     )
     '''
-    
+    print(os.getcwd())
     columns_to_drop = ["positie", "lftdcat", "lftdhhh", "aantalhh", "woonvorm", "brutoink", "nettoink", "brutocat", "nettocat", "oplcat", "doetmee", "simpc", "netinc", "nettoink_f", "nettohh_f", "werving", "age_imp"] 
+    
     background_df.drop(columns=columns_to_drop, axis=1, inplace=True)
 
     df_cleaned = clean_df(background_df,background_df)
@@ -258,7 +260,7 @@ def predict_outcomes(df, background_df, model_path=''):
     sequence_length = 165
     model_name=model_path+'model.h5'
     #model_path+
-    with open("/app/train_pairs.pkl", 'rb') as f:
+    with open("train_pairs.pkl", 'rb') as f:
      train_pairs = pickle.load(f)
     #print('dentro predict - len(train_pairs): ',len(train_pairs))
     with open(model_path+'tokens.pkl', 'rb') as f:
