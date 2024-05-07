@@ -257,7 +257,7 @@ def predict_outcomes(df, background_df, model_path=''):
 
     df_cleaned = clean_df(background_df,background_df)
     
-    sequence_length = 165
+    sequence_length = 1000
     model_name=model_path+'model.h5'
     #model_path+
     with open('train_pairs.pkl', 'rb') as f:
