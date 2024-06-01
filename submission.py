@@ -257,7 +257,7 @@ def predict_outcomes(df, background_df, model_path=''):
 
     df_cleaned = clean_df(background_df,background_df)
     
-    sequence_length = 1000#2500
+    sequence_length = 2500
     model_name=model_path+'model.h5'
     #model_path+
     with open('train_pairs.pkl', 'rb') as f:
@@ -266,7 +266,7 @@ def predict_outcomes(df, background_df, model_path=''):
     with open(model_path+'tokens.pkl', 'rb') as f:
      tokens = pickle.load(f)
 
-    batch_size = 1024#32#1024#64
+    batch_size = 32#1024#32#1024#64
     vocab_size = len(tokens)+4
 
     #print('Tokens: ', tokens)
@@ -298,11 +298,11 @@ def predict_outcomes(df, background_df, model_path=''):
     num_heads = 8
     text_input = []
     #V2
-    #var=['year','month','age','aantalki','partner','burgstat','woning','belbezig','oplzon','oplmet',
-    #    'sted','gender_imp','migration_background_imp','brutoink_f_cat','brutohh_f_cat']
+    var=['year','month','age','aantalki','partner','burgstat','woning','belbezig','oplzon','oplmet',
+        'sted','gender_imp','migration_background_imp','brutoink_f_cat','brutohh_f_cat']
     
     #V1 'age',
-    var=['year','month','sted','gender_imp','migration_background_imp','brutoink_f_cat','brutohh_f_cat']
+    #var=['year','month','sted','gender_imp','migration_background_imp','brutoink_f_cat','brutohh_f_cat']
 
     unique_nomem_encr=df_cleaned['nomem_encr'].unique()
     #print('dentro predict - len(unique_nomem_encr): ',len(unique_nomem_encr))
@@ -325,6 +325,10 @@ def predict_outcomes(df, background_df, model_path=''):
     nomem_encr_text_input=[int(x[0:x.find(' ')]) for x in text_input]
     #text_input=[[x[x.find(' ')+1:],x] for x in text_input]
     text_input=[x[x.find(' ')+1:] for x in text_input]
+    for item in text_input:
+       splt=item.split() 
+       if len(splt)>2500:
+           item=' '.join(splt[len(splt)-max_len:])
     print('len(nomem_encr_text_input): ',len(nomem_encr_text_input))
     #print('nomem_encr_text_input[0]: ',nomem_encr_text_input[0])
     print('len(text_input): ',len(text_input))
