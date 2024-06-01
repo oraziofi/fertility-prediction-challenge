@@ -191,7 +191,7 @@ def clean_df(df, background_df):
 
     df_filt["year"] = df_filt['wave'].astype(str).str[0:4].astype(int)
     df_filt["month"] = df_filt['wave'].astype(str).str[4:].astype(int)
-    #df_filt["age"] = (df_filt["year"]-df_filt["birthyear_imp"]).astype(int)     
+    df_filt["age"] = (df_filt["year"]-df_filt["birthyear_imp"]).astype(int)     
     #df_filt = df_filt[df_filt["age"]>18]
     # into categories
     # rest were already grouped into categories, just converting the type
