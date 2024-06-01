@@ -170,7 +170,9 @@ def clean_df(df, background_df):
     """
     
     df_filt=background_df.copy()
-    df_filt = df_filt[~df_filt['birthyear_imp'].isna()] 
+    #df_filt = df_filt[~df_filt['birthyear_imp'].isna()] 
+    mean_value = df_filt['birthyear_imp'].mean()
+    df_filt['birthyear_imp'].fillna(value=mean_value, inplace=True)
     cols_to_cat = ['brutoink_f', 'brutohh_f']
     for column in cols_to_cat:
      df_filt[column + '_cat'] = 'Q0'  
