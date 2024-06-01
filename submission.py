@@ -257,7 +257,7 @@ def predict_outcomes(df, background_df, model_path=''):
 
     df_cleaned = clean_df(background_df,background_df)
     
-    sequence_length = 2500
+    sequence_length = 1000#2500
     model_name=model_path+'model.h5'
     #model_path+
     with open('train_pairs.pkl', 'rb') as f:
@@ -266,7 +266,7 @@ def predict_outcomes(df, background_df, model_path=''):
     with open(model_path+'tokens.pkl', 'rb') as f:
      tokens = pickle.load(f)
 
-    batch_size = 32#1024#64
+    batch_size = 1024#32#1024#64
     vocab_size = len(tokens)+4
 
     #print('Tokens: ', tokens)
